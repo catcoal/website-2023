@@ -3,6 +3,14 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: true,
   app: {
+    head:{
+      script:[
+        {
+          // IconLord
+          src:"https://cdn.lordicon.com/bhenfmcm.js",
+        }
+      ]
+    },
     pageTransition: { name: "page", mode: "out-in" },
   },
   runtimeConfig: {
@@ -10,7 +18,10 @@ export default defineNuxtConfig({
       apiBase: process.env.NUXT_PUBLIC_API_BASE,
     },
   },
-  plugins:[
-    '~/components/lem-pop/client'
-  ]
+  css: ["@fortawesome/fontawesome-svg-core/styles.css"],
+  plugins: [
+    {
+      src: "~/components/lem-pop/client",
+    },
+  ],
 });

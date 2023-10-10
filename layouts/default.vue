@@ -105,7 +105,7 @@ const isMenuShow = computed(() => AppStore.isMenuShow.value);
     margin-top: 60px;
     padding: var(--gap);
     transform: translateX(-100%);
-    transition: 0.3s cubic-bezier(0.25, 0.1, 0.22, 1.1);
+    transition: 0.4s cubic-bezier(0.26, 1.38, 0.64, 1);
     transition-property: transform;
   }
 }
@@ -116,7 +116,8 @@ const isMenuShow = computed(() => AppStore.isMenuShow.value);
     display: none;
   }
   .sidebar-nav-wrap{
-    /* max-width: 100%; */
+    max-width: 425px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   }
 }
 </style>

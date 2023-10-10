@@ -18,6 +18,7 @@
 </template>
 
 <script setup>
+import IconLord from "~/components/icon-lord/icon-lord.vue";
 const route = useRoute();
 const routePath = computed(() => route.path);
 // const { $lpop } = useNuxtApp();
@@ -67,5 +68,24 @@ const routePath = computed(() => route.path);
 .nav-item-inner > img {
   width: 30px;
   height: 30px;
+}
+
+@media (max-width: 1024px) {
+  .nav-item.active > .nav-item-inner {
+    border: 1px solid var(--border-color-0);
+  }
+  .nav-item-inner {
+    display: flex;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  .nav-item-inner > img {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  
 }
 </style>

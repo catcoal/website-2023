@@ -35,7 +35,18 @@ const articleLink = computed(() => "/article/" + props.data.id);
   flex-direction: column;
   gap: 10px;
   border-radius: var(--radius);
+  background-image: linear-gradient(125deg,rgba(0, 186, 124,.2) 0%,rgba(0, 186, 124,.2) 20%,transparent 65%,transparent 100%);
+  background-position-x: 90%;
+  background-size: 300% 110%;
   /* border: 1px solid var(--border-color-0); */
+  border: 1px solid;
+  border-color: transparent;
+  transition: .8s ease;
+  transition-property: background-position-x,border-color;
+}
+.article-card-wrap:hover{
+  background-position-x: 60%;
+  border-color: rgba(0, 186, 124, 0.2);
 }
 
 .body-wrap {

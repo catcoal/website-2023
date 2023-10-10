@@ -5,11 +5,7 @@
     </div>
     <div class="header-nav-inner filter-bg">
       <div v-if="routePath !== '/'" @click="HandleBack" class="back-wrap">
-        <SvgIcon
-          src="~/assets/icons/left.svg"
-          color="#213547"
-          size="25px"
-        ></SvgIcon>
+        <FontAwesomeIcon icon="fa-solid fa-chevron-left" size="lg"/>
       </div>
 
       <div class="page-title">
@@ -27,7 +23,6 @@
 
 <script setup>
 import TagItem from "~/components/tag-item/tag-item.vue";
-import SvgIcon from "~/components/svg-icon/svg-icon.vue";
 import MenuButton from "~/components/menu-button/menu-button.vue";
 
 const AppStore = useAppStore();
@@ -108,13 +103,17 @@ const SwitchMenuShow = () => {
 .back-wrap {
   position: relative;
   z-index: 2;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 10px;
   border-radius: var(--radius-r);
   cursor: pointer;
   transition: 0.3s ease;
   transition-property: background-color;
   overflow: hidden;
+  width: 47px;
+  height: 100%;
 }
 
 .back-wrap:hover {

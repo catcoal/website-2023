@@ -79,7 +79,7 @@ a {
 }
 
 @media (max-width: 768px) {
-  /* :root {
-    --gap: 10px;
-  } */
+  :root {
+    --gap: 15px;
+  }
 }
