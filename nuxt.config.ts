@@ -6,9 +6,6 @@ export default defineNuxtConfig({
     head: {
       script: [
         {
-          src:"/matomo.js",
-        },
-        {
           // IconLord
           src: "https://cdn.lordicon.com/bhenfmcm.js",
         },
