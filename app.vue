@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <NuxtLayout>
-      <NuxtLoadingIndicator color="var(--theme-color)" :height="3"/>
+      <NuxtLoadingIndicator color="var(--theme-color)" :height="3" />
       <!-- <Loading v-show="isPageLoading"></Loading> -->
       <NuxtPage></NuxtPage>
     </NuxtLayout>
@@ -12,6 +12,11 @@
 import Loading from "~/components/loading/loading.vue";
 
 useHead({
+  script: [
+    {
+      src: './plugins/matomo.js' // matomo跟踪代码
+    }
+  ],
   titleTemplate: (titleChunk) => {
     return titleChunk ? `${titleChunk} - 无聊记` : "无聊记";
   },
@@ -33,6 +38,7 @@ useHead({
 
 <style>
 @import url(./assets/style/global.css);
+
 .page-enter-active,
 .page-leave-active {
   transition: 0.3s ease;
