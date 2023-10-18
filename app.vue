@@ -12,11 +12,6 @@
 import Loading from "~/components/loading/loading.vue";
 
 useHead({
-  script: [
-    {
-      src: './plugins/matomo.js' // matomo跟踪代码
-    }
-  ],
   titleTemplate: (titleChunk) => {
     return titleChunk ? `${titleChunk} - 无聊记` : "无聊记";
   },
