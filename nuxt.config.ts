@@ -3,16 +3,16 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: true,
   app: {
-    head:{
-      script:[
+    head: {
+      script: [
         {
-          src:"./lib/matomo.js"
+          src:"/matomo.js",
         },
         {
           // IconLord
-          src:"https://cdn.lordicon.com/bhenfmcm.js",
-        }
-      ]
+          src: "https://cdn.lordicon.com/bhenfmcm.js",
+        },
+      ],
     },
     pageTransition: { name: "page", mode: "out-in" },
   },
