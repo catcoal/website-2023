@@ -1,1 +1,1 @@
-NUXT_PUBLIC_API_BASE=http://api.lemming.top/api
+NUXT_PUBLIC_API_BASE=https://api.lemming.top/api
