@@ -6,7 +6,7 @@ const imageUrls = ref(props.images || []);
 if (props.mode === "recommend") {
   // 获取推荐数据
   let res = await FetchPostRecommendList();
-  imageUrls.value = res.data.list.map((item) => {
+  imageUrls.value = res.data.map((item) => {
     return {
       id: item.id,
       cover: item.covers[0],
@@ -15,7 +15,7 @@ if (props.mode === "recommend") {
 }
 
 const articleLink = (item) => {
-  if(props.mode == 'recommend'){
+  if (props.mode == 'recommend') {
     return "/article/" + item.id;
   }
 };
@@ -42,12 +42,8 @@ const imageClass = computed(() => {
 
 <template>
   <object class="image-wrap" :class="imageClass">
-    <NuxtLink
-      class="image-item"
-      v-for="item in imageUrls"
-      :key="mode == 'recommend' ? item.id : item"
-      :to="articleLink(item)"
-    >
+    <NuxtLink class="image-item" v-for="item in imageUrls" :key="mode == 'recommend' ? item.id : item"
+      :to="articleLink(item)">
       <img :src="mode == 'recommend' ? item.cover : item" alt="" />
     </NuxtLink>
   </object>
@@ -71,7 +67,7 @@ const imageClass = computed(() => {
   border: unset;
 }
 
-.image-wrap.one > .image-item {
+.image-wrap.one>.image-item {
   width: 100%;
   height: auto;
   max-width: fit-content;
@@ -82,7 +78,7 @@ const imageClass = computed(() => {
   padding-top: unset;
 }
 
-.image-wrap.one > .image-item > img {
+.image-wrap.one>.image-item>img {
   position: relative;
   top: unset;
   left: unset;
@@ -94,13 +90,13 @@ const imageClass = computed(() => {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.image-wrap.four > .image-item:first-child {
+.image-wrap.four>.image-item:first-child {
   grid-column-start: 1;
   grid-column-end: 4;
   padding-top: 60%;
 }
 
-.image-wrap.five > .image-item:first-child {
+.image-wrap.five>.image-item:first-child {
   grid-column-start: 1;
   grid-column-end: 3;
   padding-top: calc(50% - 1px);
@@ -114,7 +110,7 @@ const imageClass = computed(() => {
   padding-top: 100%;
 }
 
-.image-item > img {
+.image-item>img {
   display: block;
   position: absolute;
   top: 0;

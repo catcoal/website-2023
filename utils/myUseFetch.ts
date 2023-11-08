@@ -7,9 +7,13 @@ type Methods = "GET" | "POST" | "DELETE" | "PUT";
 // const BASE_URL = "http://api.lemming.top/api";
 
 export interface IResultData<T> {
-  code: number;
   data?: T;
-  msg?: string;
+  meta?: any;
+}
+
+export interface PageOptions {
+  page?: number;
+  pageSize?: number;
 }
 
 class HttpRequest {
@@ -18,7 +22,7 @@ class HttpRequest {
     method: Methods,
     data: any,
     options?: UseFetchOptions<T>
-  ):Promise<IResultData<T>> {
+  ): Promise<IResultData<T>> {
     return new Promise((resolve, reject) => {
       const config = useRuntimeConfig();
       const BASE_URL = config.public.apiBase;

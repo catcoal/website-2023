@@ -3,12 +3,12 @@ import IconLord from "~/components/icon-lord/icon-lord.vue";
 import { GetNotice } from "~/api/common";
 const notice = ref("");
 
-let data = await GetNotice();
-notice.value = data.data.value;
+let res = await GetNotice('notice');
+notice.value = res.data;
 </script>
 
 <template>
-  <div class="notice-wrap">
+  <div class="notice-wrap" v-if="notice">
     <div class="header-wrap">
       <div class="tag-wrap">
         <IconLord :icon="'msetysan'" :trigger="'loop'"></IconLord>

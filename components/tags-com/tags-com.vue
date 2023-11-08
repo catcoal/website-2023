@@ -4,7 +4,7 @@ import { FetchTagList } from "~/api/tag";
 
 const TagsData = ref([]);
 const res = await FetchTagList();
-TagsData.value = res.data.list;
+TagsData.value = res.data;
 </script>
 
 <template>
