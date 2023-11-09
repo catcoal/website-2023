@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { ParseTime } from "~/utils/date";
-const props = defineProps({
-  data: {
-    type: Object,
-    default: {},
-  },
-});
+import { PostDetail } from "~/api/post"
+const props = defineProps<{
+  data: PostDetail
+}>();
 const authorName = computed(() =>
   props.data.author ? "@" + props.data.author?.author : ""
 );
@@ -41,7 +39,7 @@ const authorName = computed(() =>
   overflow: hidden;
 }
 
-.avatar-wrap > img {
+.avatar-wrap>img {
   width: 100%;
   height: 100%;
 }
@@ -61,17 +59,18 @@ const authorName = computed(() =>
   display: flex;
   gap: 0 10px;
   flex-wrap: wrap;
+  opacity: 0.7;
 }
 
-.nickname > p {
+.nickname>p {
   font-weight: 400;
 }
 
-.nickname > span {
+.nickname>span {
   opacity: 0.8;
 }
 
-.user-info-wrap > h2 {
+.user-info-wrap>h2 {
   font-size: 18px;
   line-height: 20px;
   font-weight: 500;

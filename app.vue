@@ -42,11 +42,11 @@ useHead({
 
 .page-enter-from {
   opacity: 0;
-  transform: translate3d(20px, 0, 0);
+  transform: translate3d(20px, 0, 0) translateZ(0);
 }
 
 .page-leave-to {
   opacity: 0;
-  transform: translate3d(-20px, 0, 0);
+  transform: translate3d(-20px, 0, 0) translateZ(0);
 }
 </style>

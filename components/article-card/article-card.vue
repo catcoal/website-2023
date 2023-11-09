@@ -1,13 +1,13 @@
 <template>
-  <NuxtLink :to="articleLink" class="article-card-wrap">
+  <NuxtLink :to="articleLink" class="article-card-wrap Stereobox">
     <ArticleHeader :data="data"></ArticleHeader>
     <div class="body-wrap">
       <p>{{ data.description }}</p>
-      <div class="images-wrap">
+      <div class="images-wrap" v-if="data.covers.length">
         <ArticleImagesGrid :images="data.covers"></ArticleImagesGrid>
       </div>
     </div>
-    <div class="footer-wrap">
+    <div class="footer-wrap" v-if="data.tags.length">
       <div class="tag-wrap">
         <TagItem v-for="tag in data.tags" :key="tag.id" :data="tag"></TagItem>
       </div>
@@ -15,15 +15,18 @@
   </NuxtLink>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { PostDetail } from "~/api/post";
 import ArticleHeader from "~/components/article-header/article-header.vue";
 import ArticleImagesGrid from "~/components/article-images-grid/article-images-grid.vue";
 import TagItem from "~/components/tag-item/tag-item.vue";
-// import {} from "~/utils/date.js";
 
-const props = defineProps(["data"]);
+const props = defineProps<{
+  data: PostDetail
+}>()
+
 // 文章详情列表
-const articleLink = computed(() => "/article/" + props.data.id);
+const articleLink = computed(() => "/article/" + props.data.enTitle);
 </script>
 
 <style scoped>
@@ -35,16 +38,17 @@ const articleLink = computed(() => "/article/" + props.data.id);
   flex-direction: column;
   gap: 10px;
   border-radius: var(--radius);
-  background-image: linear-gradient(125deg,rgba(0, 186, 124,.2) 0%,rgba(0, 186, 124,.2) 20%,transparent 65%,transparent 100%);
+  background-image: linear-gradient(125deg, rgba(0, 186, 124, .2) 0%, rgba(0, 186, 124, .2) 20%, transparent 65%, transparent 100%);
   background-position-x: 90%;
   background-size: 300% 110%;
   /* border: 1px solid var(--border-color-0); */
   border: 1px solid;
   border-color: transparent;
   transition: .8s ease;
-  transition-property: background-position-x,border-color;
+  transition-property: background-position-x, border-color;
 }
-.article-card-wrap:hover{
+
+.article-card-wrap:hover {
   background-position-x: 60%;
   border-color: rgba(0, 186, 124, 0.2);
 }

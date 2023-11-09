@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@types/markdown-it": "^13.0.6",
     "@types/node": "^18.17.3",
     "nuxt": "^3.6.5"
   },
@@ -19,6 +20,8 @@
     "@fortawesome/free-regular-svg-icons": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/vue-fontawesome": "^3.0.3",
+    "highlight.js": "^11.9.0",
+    "markdown-it": "^13.0.2",
     "vue-matomo": "^4.2.0"
   }
 }

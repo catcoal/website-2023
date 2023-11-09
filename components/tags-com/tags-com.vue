@@ -18,8 +18,8 @@ TagsData.value = res.data;
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-  padding: var(--gap);
-  border: 1px solid var(--border-color-1);
+  /* padding: var(--gap); */
+  /* border: 1px solid var(--border-color-1); */
   border-radius: var(--radius);
 }
 </style>

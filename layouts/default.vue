@@ -16,7 +16,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import ArticleImagesGrid from "~/components/article-images-grid/article-images-grid.vue";
 import NoticeCom from "~/components/notice-com/notice-com.vue";
 import TagsCom from "~/components/tags-com/tags-com.vue";
@@ -68,6 +68,7 @@ const isMenuShow = computed(() => AppStore.isMenuShow.value);
 }
 
 @media (max-width: 1024px) {
+
   /* 在小屏幕上的样式 */
   .AppSide.left {
     position: fixed;
@@ -81,20 +82,25 @@ const isMenuShow = computed(() => AppStore.isMenuShow.value);
     transition: 0.3s cubic-bezier(0.25, 0.1, 0.09, 1.19);
     transition-property: opacity;
     padding: var(--gap);
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(110, 181, 133, 0.1);
+    backdrop-filter: blur(10px);
     max-width: 100%;
     border-radius: 0;
   }
+
   .AppSide.left.show {
     opacity: 1;
     pointer-events: unset;
   }
-  .AppSide.left.show > .sidebar-nav-wrap {
+
+  .AppSide.left.show>.sidebar-nav-wrap {
     transform: translateX(0%);
   }
+
   .AppSide.right {
     max-width: 260px;
   }
+
   .sidebar-nav-wrap {
     /* background-color: rgba(244, 246, 251, 0.85); */
     /* backdrop-filter: blur(12px); */
@@ -111,11 +117,13 @@ const isMenuShow = computed(() => AppStore.isMenuShow.value);
 }
 
 @media (max-width: 768px) {
+
   /* 在小屏幕上的样式 */
   .AppSide.right {
     display: none;
   }
-  .sidebar-nav-wrap{
+
+  .sidebar-nav-wrap {
     max-width: 425px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   }

@@ -16,9 +16,7 @@ useHead({
 
 const ArticleData = ref([]);
 
-let res = await FetchPostList({
-  tagId: 1
-});
+let res = await FetchPostList();
 ArticleData.value = res.data;
 
 </script>

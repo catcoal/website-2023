@@ -1,32 +1,28 @@
 <template>
   <div class="container">
     <div class="article-list">
-      <ArticleCard
-        v-for="item in ArticleData"
-        :data="item"
-        :key="item.id"
-      ></ArticleCard>
+      <ArticleCard v-for="item in ArticleData" :data="item" :key="item.id"></ArticleCard>
     </div>
   </div>
 </template>
 
 <script setup>
 import ArticleCard from "~/components/article-card/article-card.vue";
-import { FetchPostList,FetchPostDetail } from "~/api/post";
+import { FetchPostList, FetchPostDetail } from "~/api/post";
 
 const route = useRoute();
 let tagId = computed(() => route.params.id);
 
 useHead({
-  title:"类别"
+  title: "类别"
 })
 
 const ArticleData = ref([]);
 
 let res = await FetchPostList({
-    tagId
+  tagId
 });
-ArticleData.value = res.data.list;
+ArticleData.value = res.data;
 </script>
 
 <style scoped>

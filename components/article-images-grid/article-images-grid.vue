@@ -1,27 +1,39 @@
-<script setup>
+<script setup lang="ts">
 import { FetchPostRecommendList } from "~/api/post";
-const props = defineProps(["images", "mode"]);
-const imageUrls = ref(props.images || []);
+
+interface customImageItem {
+  id: number,
+  enTitle: string,
+  cover: string
+}
+
+const props = defineProps<{
+  images?: string[] | customImageItem[],
+  mode?: 'recommend' | 'default'
+}>();
+
+const imageItems = ref(props.images || []);
 
 if (props.mode === "recommend") {
   // 获取推荐数据
   let res = await FetchPostRecommendList();
-  imageUrls.value = res.data.map((item) => {
+  imageItems.value = res.data!.map((item) => {
     return {
       id: item.id,
+      enTitle: item.enTitle,
       cover: item.covers[0],
-    };
+    } as customImageItem;
   });
 }
 
-const articleLink = (item) => {
+const articleLink = (item: customImageItem) => {
   if (props.mode == 'recommend') {
-    return "/article/" + item.id;
+    return "/article/" + item.enTitle;
   }
 };
 
 const imageClass = computed(() => {
-  switch (imageUrls.value?.length) {
+  switch (imageItems.value?.length) {
     case 1:
       return "one";
     case 2:
@@ -42,9 +54,10 @@ const imageClass = computed(() => {
 
 <template>
   <object class="image-wrap" :class="imageClass">
-    <NuxtLink class="image-item" v-for="item in imageUrls" :key="mode == 'recommend' ? item.id : item"
-      :to="articleLink(item)">
-      <img :src="mode == 'recommend' ? item.cover : item" alt="" />
+    <NuxtLink class="image-item" v-for="item in imageItems"
+      :key="(mode == 'recommend' ? (item as customImageItem).id : item as string)"
+      :to="articleLink(item as customImageItem)">
+      <img :src="(mode == 'recommend' ? (item as customImageItem).cover : item as string)" alt="" />
     </NuxtLink>
   </object>
 </template>

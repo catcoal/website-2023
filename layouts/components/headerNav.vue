@@ -1,22 +1,18 @@
 <template>
   <div class="header-nav">
-    <div @click="SwitchMenuShow" class="menu-button filter-bg">
+    <div @click="SwitchMenuShow" class="menu-button filter-bg Stereobox">
       <MenuButton></MenuButton>
     </div>
-    <div class="header-nav-inner filter-bg">
-      <div v-if="routePath !== '/'" @click="HandleBack" class="back-wrap">
-        <FontAwesomeIcon icon="fa-solid fa-chevron-left" size="lg"/>
+    <div class="header-nav-inner filter-bg Stereobox">
+      <div v-if="routePath !== '/'" key="0" @click="HandleBack" class="back-wrap">
+        <FontAwesomeIcon icon="fa-solid fa-chevron-left" size="lg" />
       </div>
 
-      <div class="page-title">
+      <div class="page-title" key="1">
         {{ pageNameEnum[routeName] }}
       </div>
 
-      <TagItem
-        @click.stop
-        :data="categoriesData"
-        v-if="routeName == 'categories-id'"
-      ></TagItem>
+      <TagItem @click.stop :data="categoriesData" v-if="routeName == 'categories-id'"></TagItem>
     </div>
   </div>
 </template>
@@ -127,6 +123,7 @@ const SwitchMenuShow = () => {
 }
 
 @media (min-width: 1024px) {
+
   /* 在小屏幕上的样式 */
   .menu-button {
     display: none;

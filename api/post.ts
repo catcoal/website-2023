@@ -1,23 +1,25 @@
-import Request, { IResultData, PageOptions } from "../utils/myUseFetch";
+import Request, { IResultData, PageOptions } from "~/utils/myUseFetch";
+import { ResTag } from "./tag";
 
-interface PostDetail {
-  id: Number;
-  title: String;
+export interface PostDetail {
+  id: number;
+  title: string;
+  enTitle: string;
   author: Author;
-  authorId: Number;
-  commentCount: Number;
-  viewCount: Number;
+  authorId: number;
+  commentCount: number;
+  viewCount: number;
   commentEnabled: Boolean;
-  content: String;
-  covers: Array<String>;
-  createdAt: String;
-  updatedAt: String;
-  description: String;
+  content: string;
+  covers: string[];
+  createdAt: string;
+  updatedAt: string;
+  description: string;
   isRecommend: Boolean;
   isTop: Boolean;
   status: PostStatus;
-  tags: Array<Tag>;
-  weight: Number;
+  tags: ResTag[];
+  weight: number;
 }
 
 // status 状态 （publish=发布;private=私有;draft=草稿(默认);encrypt=加密）
@@ -28,50 +30,35 @@ enum PostStatus {
   encrypt,
 }
 
-interface Author {
-  id: Number;
-  author: String;
-  authorUrl: String;
-  emailHash: String;
+export interface Author {
+  id: number;
+  author: string;
+  authorUrl: string;
+  emailHash: string;
 }
 
-interface Tag {
-  id: Number;
-  name: String;
-  type: String;
-  weight: Number;
-  createdAt: String;
-}
-
-interface PostListRequest {
-  tagId?: Number;
-}
-
-interface PostListResponse {
-  count: Number;
-  list: Array<PostDetail>;
+interface PostListQuery {
+  tagId?: number;
 }
 
 // 获取文章列表
 export function FetchPostList(
-  params: PostListRequest & PageOptions
-): Promise<IResultData<PostListResponse>> {
+  params: PostListQuery & PageOptions
+): Promise<IResultData<PostDetail[]>> {
   return Request.get("/posts", params);
 }
 
 // 获取文章详情
-export function FetchPostDetail(id: Number): Promise<IResultData<PostDetail>> {
+export function FetchPostDetail(id: number): Promise<IResultData<PostDetail>> {
   return Request.get("/post/" + id);
 }
 
 // 获取随机文章列表
-export function FetchPostRandomList(): Promise<IResultData<PostListResponse>> {
+export function FetchPostRandomList(): Promise<IResultData<PostDetail[]>> {
   return Request.get("/posts/random");
 }
 
 // 获取推荐文章列表
-export function FetchPostRecommendList(): Promise<
-  IResultData<PostListResponse>
-> {
+export function FetchPostRecommendList(): Promise<IResultData<PostDetail[]>> {
   return Request.get("/posts/recommend");
 }
