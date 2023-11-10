@@ -1,5 +1,6 @@
-<script setup>
-const props = defineProps(["data"]);
+<script setup lang="ts">
+import { ResTag } from "~/api/tag"
+const props = defineProps<{ data: ResTag }>();
 const categoriesLink = computed(
   () => "/categories/" + props.data.id + "?name=" + props.data.name
 );
@@ -7,7 +8,7 @@ const categoriesLink = computed(
 
 <template>
   <object>
-    <NuxtLink :to="categoriesLink" class="tag-item">
+    <NuxtLink :to="categoriesLink" :aria-label="data.name" class="tag-item">
       <p># {{ data.name }}</p>
     </NuxtLink>
   </object>

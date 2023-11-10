@@ -4,6 +4,21 @@ export default defineNuxtConfig({
   ssr: true,
   app: {
     head: {
+      meta: [
+        {
+          name: "author",
+          content: "Lemming",
+        },
+        {
+          name: "keywords",
+          content:
+            "Lem,Lem Blog,Lemming Blog,Blog,macOS,Windows,记录,分享,前端",
+        },
+        {
+          name: "description",
+          content: "分享开发者 Lemming 的无聊生活，不定时发布，欢迎关注",
+        },
+      ],
       script: [
         {
           src: "",

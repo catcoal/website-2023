@@ -15,6 +15,7 @@ useHead({
     return titleChunk ? `${titleChunk} - 无聊记` : "无聊记";
   },
   htmlAttrs: {
+    lang: "zh",
     // 页面色彩模式
     "data-color-mode": "light",
   },

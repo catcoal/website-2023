@@ -1,10 +1,10 @@
 <template>
-  <NuxtLink :to="articleLink" class="article-card-wrap Stereobox">
+  <NuxtLink :to="articleLink" class="article-card-wrap Stereobox" :aria-label="data.title">
     <ArticleHeader :data="data"></ArticleHeader>
     <div class="body-wrap">
       <p>{{ data.description }}</p>
       <div class="images-wrap" v-if="data.covers.length">
-        <ArticleImagesGrid :images="data.covers"></ArticleImagesGrid>
+        <ArticleImagesGrid :alt="data.title" :images="data.covers"></ArticleImagesGrid>
       </div>
     </div>
     <div class="footer-wrap" v-if="data.tags.length">

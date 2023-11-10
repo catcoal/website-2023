@@ -6,18 +6,18 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import ArticleCard from "~/components/article-card/article-card.vue";
-import { FetchPostList, FetchPostDetail } from "~/api/post";
+import { FetchPostList, PostDetail } from "~/api/post";
 
 useHead({
   title: "Lemming"
 })
 
-const ArticleData = ref([]);
+const ArticleData = ref<PostDetail[]>([]);
 
 let res = await FetchPostList();
-ArticleData.value = res.data;
+ArticleData.value = res.data as PostDetail[];
 
 </script>
 

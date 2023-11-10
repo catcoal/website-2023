@@ -1,15 +1,11 @@
 <script setup lang="ts">
-import { FetchPostRecommendList } from "~/api/post";
+import { FetchPostRecommendList, PostDetail } from "~/api/post";
 import { OptimizeImageURL } from "~/utils/utils";
 
-interface customImageItem {
-  id: number,
-  enTitle: string,
-  cover: string
-}
 
 const props = defineProps<{
-  images?: string[] | customImageItem[],
+  alt?: string,
+  images?: PostDetail[] | string[],
   mode?: 'recommend' | 'default'
 }>();
 
@@ -18,16 +14,10 @@ const imageItems = ref(props.images || []);
 if (props.mode === "recommend") {
   // 获取推荐数据
   let res = await FetchPostRecommendList();
-  imageItems.value = res.data!.map((item) => {
-    return {
-      id: item.id,
-      enTitle: item.enTitle,
-      cover: item.covers[0],
-    } as customImageItem;
-  });
+  imageItems.value = res.data as PostDetail[];
 }
 
-const articleLink = (item: customImageItem) => {
+const articleLink = (item: PostDetail) => {
   if (props.mode == 'recommend') {
     return "/article/" + item.enTitle;
   }
@@ -63,13 +53,20 @@ const imageQuality = (url: string) => {
 </script>
 
 <template>
-  <object class="image-wrap" :class="imageClass">
-    <NuxtLink class="image-item" v-for="item in imageItems"
-      :key="(mode == 'recommend' ? (item as customImageItem).id : item as string)"
-      :to="articleLink(item as customImageItem)">
-      <img :src="imageQuality(mode == 'recommend' ? (item as customImageItem).cover : item as string)" alt="" />
+  <!-- 推荐 -->
+  <object class="image-wrap" :class="imageClass" v-if="mode === 'recommend'">
+    <NuxtLink class="image-item" v-for="item in imageItems" :aria-label="(item as PostDetail).title"
+      :key="((item as PostDetail).id)" :to="articleLink(item as PostDetail)">
+      <img :src="imageQuality((item as PostDetail).covers[0])" :alt="(item as PostDetail).title" />
     </NuxtLink>
   </object>
+
+  <!-- 其他 -->
+  <div class="image-wrap" :class="imageClass" v-else>
+    <div class="image-item" v-for="item in imageItems" :key="(item as string)">
+      <img :src="imageQuality(item as string)" :alt="alt" />
+    </div>
+  </div>
 </template>
 
 <style scoped>

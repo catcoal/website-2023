@@ -1,26 +1,25 @@
-<script setup>
+<script setup lang="ts">
 import ArticleHeader from "~/components/article-header/article-header.vue";
 import RichText from "./components/rich-text.vue";
-import { FetchPostDetail } from "~/api/post";
+import { FetchPostDetail, PostDetail } from "~/api/post";
 
 const route = useRoute();
-const PostDetail = ref({});
-let ArticleId = computed(() => route.params.id);
-
+const PostDetail = ref<PostDetail>();
+let ArticleId = computed(() => route.params.id as string);
 let res = await FetchPostDetail(ArticleId.value);
 PostDetail.value = res.data;
 
 useHead({
-  title: PostDetail.value.title,
+  title: PostDetail.value?.title || '',
 });
 
 </script>
 
 <template>
   <div class="post-wrap">
-    <ArticleHeader :data="PostDetail"></ArticleHeader>
+    <ArticleHeader :data="PostDetail!"></ArticleHeader>
     <div class="body-wrap">
-      <RichText :richText="PostDetail.content"></RichText>
+      <RichText :richText="PostDetail!.content"></RichText>
     </div>
   </div>
 </template>
@@ -49,7 +48,7 @@ useHead({
   overflow: hidden;
 }
 
-.avatar-wrap > img {
+.avatar-wrap>img {
   width: 100%;
   height: 100%;
 }
@@ -62,14 +61,14 @@ useHead({
   gap: 2px;
 }
 
-.user-info-wrap > span {
+.user-info-wrap>span {
   display: block;
   font-size: 14px;
   font-weight: 300;
   line-height: 20px;
 }
 
-.user-info-wrap > h2 {
+.user-info-wrap>h2 {
   font-size: 18px;
   line-height: 20px;
   font-weight: 500;

@@ -43,13 +43,15 @@ interface PostListQuery {
 
 // 获取文章列表
 export function FetchPostList(
-  params: PostListQuery & PageOptions
+  params?: PostListQuery & PageOptions
 ): Promise<IResultData<PostDetail[]>> {
   return Request.get("/posts", params);
 }
 
 // 获取文章详情
-export function FetchPostDetail(id: number): Promise<IResultData<PostDetail>> {
+export function FetchPostDetail(
+  id: number | string
+): Promise<IResultData<PostDetail>> {
   return Request.get("/post/" + id);
 }
 
