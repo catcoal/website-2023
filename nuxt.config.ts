@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@nuxt/image"],
   image: {},
-  ssr: false,
+  ssr: true,
   app: {
     head: {
       script: [
