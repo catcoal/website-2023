@@ -67,10 +67,7 @@ const imageQuality = (url: string) => {
     <NuxtLink class="image-item" v-for="item in imageItems"
       :key="(mode == 'recommend' ? (item as customImageItem).id : item as string)"
       :to="articleLink(item as customImageItem)">
-      <NuxtImg loading="lazy" placeholder
-        :src="imageQuality(mode == 'recommend' ? (item as customImageItem).cover : item as string)">
-      </NuxtImg>
-      <!-- <img :src="imageQuality(mode == 'recommend' ? (item as customImageItem).cover : item as string)" alt="" /> -->
+      <img :src="imageQuality(mode == 'recommend' ? (item as customImageItem).cover : item as string)" alt="" />
     </NuxtLink>
   </object>
 </template>
