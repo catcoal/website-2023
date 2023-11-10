@@ -69,6 +69,8 @@ const articleLink = computed(() => "/article/" + props.data.enTitle);
 }
 
 .tag-wrap {
+  display: flex;
   flex-wrap: wrap;
+  gap: 5px 10px;
 }
 </style>

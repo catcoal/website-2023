@@ -1,13 +1,14 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  modules: ["@nuxt/image"],
+  image: {},
   ssr: false,
   app: {
     head: {
       script: [
         {
-          // IconLord
-          src: "https://cdn.lordicon.com/bhenfmcm.js",
+          src: "",
         },
       ],
     },

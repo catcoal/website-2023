@@ -11,7 +11,7 @@ notice.value = res.data;
   <div class="notice-wrap" v-if="notice">
     <div class="header-wrap">
       <div class="tag-wrap">
-        <IconLord :icon="'msetysan'" :trigger="'loop'"></IconLord>
+        <!-- <IconLord :icon="'msetysan'" :trigger="'loop'"></IconLord> -->
         <span>消息</span>
       </div>
     </div>

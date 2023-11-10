@@ -3,6 +3,8 @@
   margin: 0;
   box-sizing: border-box;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: PingFang SC, Hiragino Sans GB, Microsoft YaHei Light,
+    WenQuanYi Micro Hei, sans-serif; */
 }
 
 [data-color-mode="light"] {

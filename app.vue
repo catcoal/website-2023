@@ -1,15 +1,14 @@
 <template>
   <div id="app">
+    <div class="root-bg-image"></div>
     <NuxtLayout>
       <NuxtLoadingIndicator color="var(--theme-color)" :height="3" />
-      <!-- <Loading v-show="isPageLoading"></Loading> -->
       <NuxtPage></NuxtPage>
     </NuxtLayout>
   </div>
 </template>
 
 <script setup>
-import Loading from "~/components/loading/loading.vue";
 
 useHead({
   titleTemplate: (titleChunk) => {
@@ -33,6 +32,18 @@ useHead({
 
 <style>
 @import url(./assets/style/global.css);
+
+.root-bg-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.05;
+  background: url(./assets/images/blob-scatter-haikei.svg);
+  background-size: 60%;
+  background-position: -10vw -10vw;
+}
 
 .page-enter-active,
 .page-leave-active {

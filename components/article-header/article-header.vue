@@ -17,7 +17,8 @@ const authorName = computed(() =>
     <div class="user-info-wrap">
       <div class="nickname">
         <p>{{ authorName }}</p>
-        <span>{{ ParseTime(data.createdAt, "{y}-{m}-{d} {h}:{i}") }}</span>
+        <span>·</span>
+        <span>{{ ParseTime(data.createdAt, "{m}月{d}日") }}</span>
       </div>
       <h2>{{ data.title }}</h2>
     </div>
@@ -32,14 +33,15 @@ const authorName = computed(() =>
 }
 
 .avatar-wrap {
-  width: 40px;
-  min-width: 40px;
-  height: 40px;
+  width: 43px;
+  min-width: 43px;
+  height: 43px;
   border-radius: 50%;
   overflow: hidden;
 }
 
 .avatar-wrap>img {
+  display: block;
   width: 100%;
   height: 100%;
 }
@@ -54,24 +56,17 @@ const authorName = computed(() =>
 
 .nickname {
   font-size: 14px;
-  font-weight: 300;
-  line-height: 20px;
-  display: flex;
-  gap: 0 10px;
-  flex-wrap: wrap;
-  opacity: 0.7;
-}
-
-.nickname>p {
   font-weight: 400;
-}
-
-.nickname>span {
-  opacity: 0.8;
+  /* line-height: 20px; */
+  display: flex;
+  gap: 0 5px;
+  flex-wrap: wrap;
+  align-items: baseline;
+  opacity: 0.5;
 }
 
 .user-info-wrap>h2 {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 20px;
   font-weight: 500;
 }

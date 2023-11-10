@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { FetchPostRecommendList } from "~/api/post";
+import { OptimizeImageURL } from "~/utils/utils";
 
 interface customImageItem {
   id: number,
@@ -50,6 +51,15 @@ const imageClass = computed(() => {
       return "";
   }
 });
+
+// 图片质量调整
+const imageQuality = (url: string) => {
+  if (imageItems.value.length <= 1) {
+    return OptimizeImageURL(url, 80)
+  } else {
+    return OptimizeImageURL(url, 50)
+  }
+}
 </script>
 
 <template>
@@ -57,7 +67,10 @@ const imageClass = computed(() => {
     <NuxtLink class="image-item" v-for="item in imageItems"
       :key="(mode == 'recommend' ? (item as customImageItem).id : item as string)"
       :to="articleLink(item as customImageItem)">
-      <img :src="(mode == 'recommend' ? (item as customImageItem).cover : item as string)" alt="" />
+      <NuxtImg loading="lazy" placeholder
+        :src="imageQuality(mode == 'recommend' ? (item as customImageItem).cover : item as string)">
+      </NuxtImg>
+      <!-- <img :src="imageQuality(mode == 'recommend' ? (item as customImageItem).cover : item as string)" alt="" /> -->
     </NuxtLink>
   </object>
 </template>

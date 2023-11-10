@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import "highlight.js/styles/base16/atelier-estuary.css"
 import hljs from "highlight.js"
+import { OptimizeImageURL } from "~/utils/utils"
 import MarkdownIt from "markdown-it";
 
 const props = defineProps<{ richText: string }>();
@@ -28,6 +29,13 @@ onMounted(() => {
       return '';
     }
   });
+  // 拦截图片重新设置
+  renderer.renderer.rules.image = (tokens, idx, options, env, self) => {
+    const originalURL = tokens[idx].attrs?.find(attr => attr[0] === 'src')?.[1] || '';
+    const newUrl = OptimizeImageURL(originalURL, 80);
+    return `<img src="${newUrl}" alt="" />`;
+  };
+  // 渲染文章
   content.value = renderer.render(props.richText);
 })
 
