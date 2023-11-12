@@ -1,9 +1,9 @@
 <template>
   <div class="header-nav">
-    <div @click="SwitchMenuShow" class="menu-button filter-bg Stereobox">
+    <div @click="SwitchMenuShow" class="menu-button filter-bg">
       <MenuButton></MenuButton>
     </div>
-    <div class="header-nav-inner filter-bg Stereobox">
+    <div class="header-nav-inner filter-bg">
       <div v-if="routePath !== '/'" key="0" @click="HandleBack" class="back-wrap">
         <FontAwesomeIcon icon="fa-solid fa-chevron-left" size="lg" />
       </div>
@@ -77,7 +77,7 @@ const SwitchMenuShow = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-r);
+  border-radius: var(--radius);
 }
 
 .header-nav-inner {
@@ -85,15 +85,15 @@ const SwitchMenuShow = () => {
   height: 100%;
   width: 100%;
   align-items: center;
-  border-radius: var(--radius-1);
+  border-radius: var(--radius);
   overflow: hidden;
   /* box-shadow: 0 0 10px 5px rgba(244, 246, 251, 0.85); */
 }
 
 .filter-bg {
-  background-color: rgba(244, 246, 251, 0.85);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--border-color-0);
+  background-color: hsla(0, 0%, 100%, .88);
+  backdrop-filter: blur(25px) saturate(20);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .04);
 }
 
 .back-wrap {
@@ -103,17 +103,24 @@ const SwitchMenuShow = () => {
   align-items: center;
   justify-content: center;
   padding: 10px;
-  border-radius: var(--radius-r);
+  border-radius: calc(var(--radius) - 4px);
   cursor: pointer;
   transition: 0.3s ease;
-  transition-property: background-color;
+  transition-property: background-color color box-shadow transform;
   overflow: hidden;
-  width: 47px;
-  height: 100%;
+  width: 40px;
+  margin-left: 5px;
+  height: 80%;
+}
+
+.back-wrap:active {
+  transform: scale(0.95);
 }
 
 .back-wrap:hover {
-  background-color: var(--bg-color-0);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .04), 0 27px 54px rgba(0, 0, 0, .04), 0 17.5px 31.625px rgba(0, 0, 0, .03), 0 10.4px 17.2px rgba(0, 0, 0, .024), 0 5.4px 8.775px rgba(0, 0, 0, .02), 0 2.2px 4.4px rgba(0, 0, 0, .016), 0 0.5px 2.125px rgba(0, 0, 0, .01);
+  background-color: var(--theme-color);
+  color: #FFF;
 }
 
 .page-title {

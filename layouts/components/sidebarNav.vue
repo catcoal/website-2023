@@ -59,33 +59,36 @@ const routePath = computed(() => route.path);
   gap: var(--gap);
   padding: 15px 30px;
   border-radius: var(--radius);
+  transition: .3s ease;
+  transition-property: background-color box-shadow;
 }
 
-.nav-item.active > .nav-item-inner {
+.nav-item.active>.nav-item-inner {
   background-color: var(--bg-color-0);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .06);
 }
 
-.nav-item-inner > img {
+.nav-item-inner>img {
   width: 30px;
   height: 30px;
 }
 
 @media (max-width: 1024px) {
-  .nav-item.active > .nav-item-inner {
+  .nav-item.active>.nav-item-inner {
     border: 1px solid var(--border-color-0);
   }
+
   .nav-item-inner {
     display: flex;
     padding: 10px 20px;
     font-size: 16px;
   }
-  .nav-item-inner > img {
+
+  .nav-item-inner>img {
     width: 28px;
     height: 28px;
   }
 }
 
-@media (max-width: 768px) {
-  
-}
+@media (max-width: 768px) {}
 </style>

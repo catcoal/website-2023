@@ -30,6 +30,7 @@ const categoriesLink = computed(
   transition-property: background-color;
   letter-spacing: 0.5;
   font-weight: 400;
+  box-shadow: inset 0 0 4px 2px var(--theme-color-1);
 }
 
 .tag-item:hover {

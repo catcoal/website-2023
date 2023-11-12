@@ -11,7 +11,7 @@ const authorName = computed(() =>
 
 <template>
   <div class="header-wrap">
-    <div class="avatar-wrap">
+    <div class="avatar-wrap Stereobox">
       <img src="~/assets/images/avatar.jpeg" alt="" srcset="" />
     </div>
     <div class="user-info-wrap">
@@ -38,6 +38,7 @@ const authorName = computed(() =>
   height: 43px;
   border-radius: 50%;
   overflow: hidden;
+  --Stereo-radius: 50%;
 }
 
 .avatar-wrap>img {

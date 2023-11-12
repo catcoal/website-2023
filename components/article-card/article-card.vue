@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink :to="articleLink" class="article-card-wrap Stereobox" :aria-label="data.title">
+  <NuxtLink :to="articleLink" class="article-card-wrap" :aria-label="data.title">
     <ArticleHeader :data="data"></ArticleHeader>
     <div class="body-wrap">
       <p>{{ data.description }}</p>
@@ -31,6 +31,7 @@ const articleLink = computed(() => "/article/" + props.data.enTitle);
 
 <style scoped>
 .article-card-wrap {
+  position: relative;
   width: 100%;
   background-color: var(--bg-color-0);
   padding: var(--gap);
@@ -38,19 +39,40 @@ const articleLink = computed(() => "/article/" + props.data.enTitle);
   flex-direction: column;
   gap: 10px;
   border-radius: var(--radius);
-  background-image: linear-gradient(125deg, rgba(0, 186, 124, .2) 0%, rgba(0, 186, 124, .2) 20%, transparent 65%, transparent 100%);
+  background-image: linear-gradient(125deg, rgba(0, 186, 124, .1) 0%, rgba(0, 186, 124, 0.1) 20%, transparent 65%, transparent 100%);
   background-position-x: 90%;
   background-size: 300% 110%;
-  /* border: 1px solid var(--border-color-0); */
   border: 1px solid;
   border-color: transparent;
   transition: .8s ease;
-  transition-property: background-position-x, border-color;
+  transition-property: background-position-x border-color box-shadow;
+  will-change: background-position-x box-shadow;
+}
+
+.article-card-wrap::after {
+  opacity: 0;
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  border-radius: calc(var(--radius) - 1px);
+  border: 1px solid hsla(0, 0%, 100%, 0.22);
+  pointer-events: none;
+  mask-image: linear-gradient(0deg, transparent, #000);
+  -webkit-mask-image: linear-gradient(0deg, transparent, #000);
+  z-index: 1;
 }
 
 .article-card-wrap:hover {
-  background-position-x: 60%;
-  border-color: rgba(0, 186, 124, 0.2);
+  background-position-x: 50%;
+  border: 1px solid rgba(0, 186, 124, 0.08);
+  box-shadow: 0 2px 4px rgba(0, 186, 124, 0.04);
+}
+
+.article-card-wrap:hover::after {
+  opacity: 1;
 }
 
 .body-wrap {
