@@ -1,6 +1,6 @@
 import { library, config } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-// 引入需要的图标
+// 引入需要的图标 // https://fontawesome.com/icons
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 // 因为默认添加了 nuxt会造成一些错误，所以不自动添加样式
 config.autoAddCss = false;

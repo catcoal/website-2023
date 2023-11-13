@@ -10,3 +10,22 @@ export const OptimizeImageURL = (url: string, size: number) => {
     return url;
   }
 };
+
+// 防抖函数
+export function Debounce<T extends (...args: any[]) => void>(
+  func: T,
+  delay: number
+): (...args: Parameters<T>) => void {
+  let timeoutId: NodeJS.Timeout | null;
+
+  return function (...args: Parameters<T>) {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+
+    timeoutId = setTimeout(() => {
+      func(...args);
+      timeoutId = null;
+    }, delay);
+  };
+}

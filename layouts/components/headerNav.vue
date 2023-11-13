@@ -106,7 +106,7 @@ const SwitchMenuShow = () => {
   border-radius: calc(var(--radius) - 4px);
   cursor: pointer;
   transition: 0.3s ease;
-  transition-property: background-color color box-shadow transform;
+  transition-property: background-color, color, box-shadow, transform;
   overflow: hidden;
   width: 40px;
   margin-left: 5px;

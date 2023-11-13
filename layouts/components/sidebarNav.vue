@@ -60,7 +60,7 @@ const routePath = computed(() => route.path);
   padding: 15px 30px;
   border-radius: var(--radius);
   transition: .3s ease;
-  transition-property: background-color box-shadow;
+  transition-property: background-color, box-shadow;
 }
 
 .nav-item.active>.nav-item-inner {

@@ -45,7 +45,7 @@ const imageClass = computed(() => {
 // 图片质量调整
 const imageQuality = (url: string) => {
   if (imageItems.value.length <= 1) {
-    return OptimizeImageURL(url, 80)
+    return OptimizeImageURL(url, 50)
   } else {
     return OptimizeImageURL(url, 50)
   }
@@ -57,14 +57,16 @@ const imageQuality = (url: string) => {
   <object class="image-wrap" :class="imageClass" v-if="mode === 'recommend'">
     <NuxtLink class="image-item" v-for="item in imageItems" :aria-label="(item as PostDetail).title"
       :key="((item as PostDetail).id)" :to="articleLink(item as PostDetail)">
-      <img :src="imageQuality((item as PostDetail).covers[0])" :alt="(item as PostDetail).title" />
+      <img src="~/assets/icons/color-placeholder.svg" :data-src="imageQuality((item as PostDetail).covers[0])"
+        :alt="(item as PostDetail).title" class="lazyload" loading="lazy" />
     </NuxtLink>
   </object>
 
   <!-- 其他 -->
   <div class="image-wrap" :class="imageClass" v-else>
     <div class="image-item" v-for="item in imageItems" :key="(item as string)">
-      <img :src="imageQuality(item as string)" :alt="alt" />
+      <img src="~/assets/icons/color-placeholder.svg" :data-src="imageQuality(item as string)" :alt="alt" class="lazyload"
+        loading="lazy" />
     </div>
   </div>
 </template>

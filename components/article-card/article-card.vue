@@ -45,8 +45,8 @@ const articleLink = computed(() => "/article/" + props.data.enTitle);
   border: 1px solid;
   border-color: transparent;
   transition: .8s ease;
-  transition-property: background-position-x border-color box-shadow;
-  will-change: background-position-x box-shadow;
+  transition-property: background-position-x, border-color, box-shadow;
+  will-change: background-position-x, box-shadow;
 }
 
 .article-card-wrap::after {
