@@ -87,12 +87,12 @@ const SwitchMenuShow = () => {
   align-items: center;
   border-radius: var(--radius);
   overflow: hidden;
-  /* box-shadow: 0 0 10px 5px rgba(244, 246, 251, 0.85); */
 }
 
 .filter-bg {
   background-color: hsla(0, 0%, 100%, .88);
   backdrop-filter: blur(25px) saturate(20);
+  -webkit-backdrop-filter: blur(25px) saturate(20);
   box-shadow: 0 0 0 1px rgba(0, 0, 0, .04);
 }
 

@@ -9,14 +9,14 @@ export interface PostDetail {
   authorId: number;
   commentCount: number;
   viewCount: number;
-  commentEnabled: Boolean;
+  commentEnabled: boolean;
   content: string;
   covers: string[];
   createdAt: string;
   updatedAt: string;
   description: string;
-  isRecommend: Boolean;
-  isTop: Boolean;
+  isRecommend: boolean;
+  isTop: boolean;
   status: PostStatus;
   tags: ResTag[];
   weight: number;

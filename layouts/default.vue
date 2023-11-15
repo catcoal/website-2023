@@ -84,6 +84,7 @@ const isMenuShow = computed(() => AppStore.isMenuShow.value);
     padding: var(--gap);
     background-color: rgba(110, 181, 133, 0.1);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     max-width: 100%;
     border-radius: 0;
   }

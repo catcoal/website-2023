@@ -29,6 +29,7 @@ class HttpRequest {
       const newOptions: UseFetchOptions<T> = {
         baseURL: BASE_URL,
         method: method,
+        credentials: "include", // 浏览器会在发送跨域请求时包含凭证信息(解决后端存储不了cookies)（需后端配合）
         ...options,
       };
 
