@@ -9,7 +9,6 @@
 </template>
 
 <script setup>
-
 useHead({
   titleTemplate: (titleChunk) => {
     return titleChunk ? `${titleChunk} - 无聊记` : "无聊记";
@@ -20,15 +19,6 @@ useHead({
     "data-color-mode": "light",
   },
 });
-
-// const NuxtApp = useNuxtApp();
-// const isPageLoading = ref(false);
-// NuxtApp.hook("page:start", () => {
-//   isPageLoading.value = true;
-// });
-// NuxtApp.hook("page:finish", () => {
-//   isPageLoading.value = false;
-// });
 </script>
 
 <style>
