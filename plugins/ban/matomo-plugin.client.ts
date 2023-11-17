@@ -2,7 +2,6 @@
 // 用户分析插件vue-matomo（关闭）
 
 // import VueMatomo from "vue-matomo";
-
 // export default defineNuxtPlugin((nuxtApp) => {
 //   nuxtApp.vueApp.use(VueMatomo, {
 //     debug: true,
