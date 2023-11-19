@@ -90,7 +90,7 @@ const SwitchMenuShow = () => {
 }
 
 .filter-bg {
-  background-color: hsla(0, 0%, 100%, .88);
+  background-color: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(25px) saturate(20);
   -webkit-backdrop-filter: blur(25px) saturate(20);
   box-shadow: 0 0 0 1px rgba(0, 0, 0, .04);
