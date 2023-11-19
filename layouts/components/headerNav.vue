@@ -78,6 +78,7 @@ const SwitchMenuShow = () => {
   align-items: center;
   justify-content: center;
   border-radius: var(--radius);
+  overflow: hidden;
 }
 
 .header-nav-inner {
@@ -90,10 +91,21 @@ const SwitchMenuShow = () => {
 }
 
 .filter-bg {
+  position: relative;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .04);
+}
+
+.filter-bg::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-color: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(25px) saturate(20);
   -webkit-backdrop-filter: blur(25px) saturate(20);
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, .04);
 }
 
 .back-wrap {
