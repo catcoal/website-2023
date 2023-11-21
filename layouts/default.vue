@@ -70,6 +70,11 @@ const isMenuShow = computed(() => AppStore.isMenuShow.value);
 @media (max-width: 1024px) {
 
   /* 在小屏幕上的样式 */
+  .default-layout {
+    max-width: 768px;
+    margin: 0 auto;
+  }
+
   .AppSide.left {
     position: fixed;
     z-index: 999;
@@ -120,6 +125,11 @@ const isMenuShow = computed(() => AppStore.isMenuShow.value);
 @media (max-width: 768px) {
 
   /* 在小屏幕上的样式 */
+  .default-layout {
+    max-width: 450px;
+    margin: 0 auto;
+  }
+
   .AppSide.right {
     display: none;
   }

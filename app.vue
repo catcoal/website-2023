@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <div class="root-bg-image"></div>
+    <AnimateBg></AnimateBg>
+    <!-- <div class="root-bg-image"></div> -->
     <NuxtLayout>
       <NuxtLoadingIndicator color="var(--theme-color)" :height="3" />
       <NuxtPage></NuxtPage>
@@ -9,6 +10,8 @@
 </template>
 
 <script setup>
+import AnimateBg from '~/components/animate-bg/animate-bg.vue';
+
 useHead({
   titleTemplate: (titleChunk) => {
     return titleChunk ? `${titleChunk} - 无聊记` : "无聊记";
