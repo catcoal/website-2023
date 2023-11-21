@@ -2,6 +2,10 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: true,
+  routeRules: {
+    "/": { prerender: true },
+    "/article/**": { prerender: true },
+  },
   app: {
     head: {
       meta: [

@@ -14,8 +14,9 @@ import d from "~/assets/canvas-animate/blob-scatter-haikei (2).svg"
 import e from "~/assets/canvas-animate/blob-scatter-haikei.svg"
 
 const timer = ref();
+const router = useRouter();
 
-useNuxtApp().hook('page:start', () => {
+router.beforeEach(() => {
     startAnimation();
 })
 
