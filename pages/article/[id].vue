@@ -22,6 +22,9 @@ useHead({
       <RichText :richText="PostDetail!.content"></RichText>
     </div>
   </div>
+  <div class="comment-wrap">
+    123
+  </div>
 </template>
 
 <style scoped>

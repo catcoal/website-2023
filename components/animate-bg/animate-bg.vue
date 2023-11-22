@@ -16,18 +16,18 @@ import e from "~/assets/canvas-animate/blob-scatter-haikei.svg"
 const timer = ref();
 const router = useRouter();
 
-router.beforeEach(() => {
-    startAnimation();
-})
+// router.beforeEach(() => {
+//     startAnimation();
+// })
 
-useNuxtApp().hook('page:transition:finish', () => {
-    if (animationActive.value) {
-        clearTimeout(timer.value);
-        timer.value = setTimeout(() => {
-            stopAnimation();
-        }, 2000)
-    }
-})
+// useNuxtApp().hook('page:transition:finish', () => {
+//     if (animationActive.value) {
+//         clearTimeout(timer.value);
+//         timer.value = setTimeout(() => {
+//             stopAnimation();
+//         }, 2000)
+//     }
+// })
 
 // Props
 const props = defineProps({

@@ -87,6 +87,12 @@ export default defineNuxtPlugin((nuxtApp) => {
     init();
   });
 
+  // 此处理是解决404错误页面跳转回来未触发的问题
+  // TODO 此次会执行两次
+  nuxtApp.hook("page:finish", async () => {
+    init();
+  });
+
   nuxtApp.hook("page:transition:finish", () => {
     init();
   });

@@ -17,41 +17,44 @@ export interface PageOptions {
 }
 
 class HttpRequest {
-  request<T = any>(
+  async request<T = any>(
     url: string,
     method: Methods,
     data: any,
     options?: UseFetchOptions<T>
   ): Promise<IResultData<T>> {
-    return new Promise((resolve, reject) => {
-      const config = useRuntimeConfig();
-      const BASE_URL = config.public.apiBase;
-      const newOptions: UseFetchOptions<T> = {
-        baseURL: BASE_URL,
-        method: method,
-        credentials: "include", // 浏览器会在发送跨域请求时包含凭证信息(解决后端存储不了cookies)（需后端配合）
-        ...options,
-      };
+    const config = useRuntimeConfig();
+    const BASE_URL = config.public.apiBase;
+    const newOptions: UseFetchOptions<T> = {
+      baseURL: BASE_URL,
+      method: method,
+      credentials: "include", // 浏览器会在发送跨域请求时包含凭证信息(解决后端存储不了cookies)（需后端配合）
+      ...options,
+    };
 
-      if (method === "GET" || method === "DELETE") {
-        newOptions.params = data;
-      }
-      if (method === "POST" || method === "PUT") {
-        newOptions.body = data;
-      }
+    if (method === "GET" || method === "DELETE") {
+      newOptions.params = data;
+    }
+    if (method === "POST" || method === "PUT") {
+      newOptions.body = data;
+    }
 
-      useFetch(url, newOptions)
-        .then((res) => {
-          if (res.status.value === "success") {
-            resolve(res.data.value as IResultData<T>);
-          } else {
-            reject(res);
-          }
-        })
-        .catch((error) => {
-          reject(error);
+    try {
+      let response = await useFetch(url, newOptions);
+      if (response.status.value === "success") {
+        return response.data.value as IResultData<T>;
+      } else {
+        throw createError({
+          statusCode: 404,
+          statusMessage: "页面丢失",
+          message: response.error.value?.data.message,
         });
-    });
+        // throw response.error.value?.data.message;
+      }
+    } catch (err: any) {
+      throw err;
+    } finally {
+    }
   }
 
   // 封装常用方法

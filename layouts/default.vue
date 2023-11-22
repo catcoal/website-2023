@@ -104,7 +104,7 @@ const isMenuShow = computed(() => AppStore.isMenuShow.value);
   }
 
   .AppSide.right {
-    max-width: 320px;
+    max-width: 260px;
   }
 
   .sidebar-nav-wrap {
