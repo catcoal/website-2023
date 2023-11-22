@@ -25,9 +25,15 @@ class HttpRequest {
   ): Promise<IResultData<T>> {
     const config = useRuntimeConfig();
     const BASE_URL = config.public.apiBase;
+    const secret = 69; // 这应该与服务器端的值相同
+    const timestamp = Date.now();
+    const ts = timestamp - (timestamp % secret) + secret; // 用于判断是否为伪造请求
     const newOptions: UseFetchOptions<T> = {
       baseURL: BASE_URL,
       method: method,
+      headers: {
+        ts: ts.toString(),
+      },
       credentials: "include", // 浏览器会在发送跨域请求时包含凭证信息(解决后端存储不了cookies)（需后端配合）
       ...options,
     };
