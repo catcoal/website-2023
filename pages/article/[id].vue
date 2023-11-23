@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ArticleHeader from "~/components/article-header/article-header.vue";
 import RichText from "./components/rich-text.vue";
+import Comment from "./components/comment.vue";
 import { FetchPostDetail, PostDetail } from "~/api/post";
 
 const route = useRoute();
@@ -12,7 +13,6 @@ PostDetail.value = res.data;
 useHead({
   title: PostDetail.value?.title || '',
 });
-
 </script>
 
 <template>
@@ -23,7 +23,7 @@ useHead({
     </div>
   </div>
   <div class="comment-wrap">
-    123
+    <Comment></Comment>
   </div>
 </template>
 
@@ -79,5 +79,9 @@ useHead({
 
 .content img {
   width: 100%;
+}
+
+.comment-wrap {
+  margin-top: var(--gap);
 }
 </style>
