@@ -52,11 +52,13 @@ const isMenuShow = computed(() => AppStore.isMenuShow.value);
   /* background-color: var(--AppSideNav-bg); */
   border-radius: var(--radius);
   width: 100%;
+  min-width: 240px;
   max-width: 240px;
 }
 
 .AppSide.right {
   width: 100%;
+  min-width: 300px;
   max-width: 300px;
 }
 

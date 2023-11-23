@@ -4,7 +4,9 @@ import CommentRelay from './comment-reply.vue';
 </script>
 
 <template>
-    <CommentRelay></CommentRelay>
+    <div class="comment-reply">
+        <CommentRelay></CommentRelay>
+    </div>
     <div class="comment-list">
         <CommentItem></CommentItem>
         <CommentItem></CommentItem>
@@ -12,6 +14,10 @@ import CommentRelay from './comment-reply.vue';
 </template>
 
 <style scoped>
+.comment-reply {
+    margin-bottom: var(--gap);
+}
+
 .comment-list {
     display: flex;
     flex-direction: column;
