@@ -2,13 +2,14 @@
 import ArticleHeader from "~/components/article-header/article-header.vue";
 import RichText from "./components/rich-text.vue";
 import Comment from "./components/comment.vue";
-import { FetchPostDetail, PostDetail } from "~/api/post";
+import { FetchPostDetail, PostDetail, PostDetailKey } from "~/api/post";
 
 const route = useRoute();
 const PostDetail = ref<PostDetail>();
 let ArticleId = computed(() => route.params.id as string);
-let res = await FetchPostDetail(ArticleId.value);
-PostDetail.value = res.data;
+PostDetail.value = (await FetchPostDetail(ArticleId.value)).data;
+// 提供数据给子组件
+provide(PostDetailKey, PostDetail);
 
 useHead({
   title: PostDetail.value?.title || '',

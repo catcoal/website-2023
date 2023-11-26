@@ -1,5 +1,6 @@
 import Request, { IResultData, PageOptions } from "~/utils/myUseFetch";
 import { ResTag } from "./tag";
+import { InjectionKey } from "nuxt/dist/app/compat/capi";
 
 export interface PostDetail {
   id: number;
@@ -21,6 +22,8 @@ export interface PostDetail {
   tags: ResTag[];
   weight: number;
 }
+export const PostDetailKey: InjectionKey<Ref<PostDetail | undefined>> =
+  Symbol("PostDetail");
 
 // status 状态 （publish=发布;private=私有;draft=草稿(默认);encrypt=加密）
 enum PostStatus {
