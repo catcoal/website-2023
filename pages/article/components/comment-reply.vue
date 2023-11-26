@@ -45,7 +45,7 @@ const reply = async () => {
         CommentForm.content = '';
         emit('success', comment!);
     } catch (err: any) {
-
+        replyTip.value = err;
     } finally {
         replying.value = false;
     }

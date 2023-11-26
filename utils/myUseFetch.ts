@@ -57,7 +57,7 @@ class HttpRequest {
         // throw response.error.value?.data.message;
       }
     } catch (err: any) {
-      throw err;
+      throw err.message || err;
     } finally {
     }
   }
