@@ -32,6 +32,7 @@ class HttpRequest {
       headers: {
         ts: CreateTimestamp(),
       },
+      watch: false, // 修复input时会触发请求 (https://github.com/nuxt/nuxt/issues/15741)
       credentials: "include", // 浏览器会在发送跨域请求时包含凭证信息(解决后端存储不了cookies)（需后端配合）
       ...options,
     };
