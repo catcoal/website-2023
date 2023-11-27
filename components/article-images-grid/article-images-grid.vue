@@ -53,7 +53,6 @@ const imageQuality = (url: string) => {
 </script>
 
 <template>
-  <!-- 推荐 -->
   <object class="image-wrap" :class="imageClass" v-if="mode === 'recommend'">
     <NuxtLink class="image-item" v-for="item in imageItems" :aria-label="(item as PostDetail).title"
       :key="((item as PostDetail).id)" :to="articleLink(item as PostDetail)">
@@ -62,7 +61,6 @@ const imageQuality = (url: string) => {
     </NuxtLink>
   </object>
 
-  <!-- 其他 -->
   <div class="image-wrap" :class="imageClass" v-else>
     <div class="image-item" v-for="item in imageItems" :key="(item as string)">
       <img src="~/assets/icons/color-placeholder.svg" :data-src="imageQuality(item as string)" :alt="alt" class="lazyload"

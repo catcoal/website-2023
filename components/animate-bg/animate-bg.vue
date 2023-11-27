@@ -2,7 +2,6 @@
     <div class="animate-wrap">
         <canvas ref="canvasRef" :width="c_width" :height="c_height"></canvas>
     </div>
-    <!-- <button @click="toggleAnimation">Toggle Animation</button> -->
 </template>
   
 <script setup lang="ts">

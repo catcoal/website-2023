@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: true,
   app: {
+    pageTransition: { name: "page", mode: "out-in" },
     head: {
       meta: [
         {
@@ -25,7 +26,6 @@ export default defineNuxtConfig({
         },
       ],
     },
-    pageTransition: { name: "page", mode: "out-in" },
   },
   runtimeConfig: {
     public: {

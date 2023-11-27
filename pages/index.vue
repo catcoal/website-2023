@@ -14,10 +14,10 @@ useHead({
   title: "Lemming"
 })
 
-const ArticleData = ref<PostDetail[]>([]);
+// const ArticleData = ref<PostDetail[]>([]);
 
 let res = await FetchPostList();
-ArticleData.value = res.data as PostDetail[];
+const ArticleData = res.data as PostDetail[];
 
 </script>
 

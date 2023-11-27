@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <AnimateBg></AnimateBg>
-    <!-- <div class="root-bg-image"></div> -->
     <NuxtLayout>
       <NuxtLoadingIndicator color="var(--theme-color)" :height="3" />
       <NuxtPage></NuxtPage>
