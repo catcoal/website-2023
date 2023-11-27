@@ -17,14 +17,16 @@ useHead({
 </script>
 
 <template>
-  <div class="post-wrap">
-    <ArticleHeader :data="PostDetail!"></ArticleHeader>
-    <div class="body-wrap">
-      <RichText :richText="PostDetail!.content"></RichText>
+  <div>
+    <div class="post-wrap">
+      <ArticleHeader :data="PostDetail!"></ArticleHeader>
+      <div class="body-wrap">
+        <RichText :richText="PostDetail!.content"></RichText>
+      </div>
     </div>
-  </div>
-  <div class="comment-wrap">
-    <Comment></Comment>
+    <div class="comment-wrap">
+      <Comment></Comment>
+    </div>
   </div>
 </template>
 
