@@ -140,8 +140,9 @@ const SwitchMenuShow = () => {
 .page-title {
   white-space: nowrap;
   padding: 0 var(--gap);
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 2px;
+  font-weight: 500;
 }
 
 @media (min-width: 1024px) {

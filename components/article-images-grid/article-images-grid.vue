@@ -53,18 +53,20 @@ const imageQuality = (url: string) => {
 </script>
 
 <template>
-  <object class="image-wrap" :class="imageClass" v-if="mode === 'recommend'">
-    <NuxtLink class="image-item" v-for="item in imageItems" :aria-label="(item as PostDetail).title"
-      :key="((item as PostDetail).id)" :to="articleLink(item as PostDetail)">
-      <img src="~/assets/icons/color-placeholder.svg" :data-src="imageQuality((item as PostDetail).covers[0])"
-        :alt="(item as PostDetail).title" class="lazyload" loading="lazy" />
-    </NuxtLink>
-  </object>
+  <div v-if="imageItems.length">
+    <object class="image-wrap" :class="imageClass" v-if="mode === 'recommend'">
+      <NuxtLink class="image-item" v-for="item in imageItems" :aria-label="(item as PostDetail).title"
+        :key="((item as PostDetail).id)" :to="articleLink(item as PostDetail)">
+        <img src="~/assets/icons/color-placeholder.svg" :data-src="imageQuality((item as PostDetail).covers[0])"
+          :alt="(item as PostDetail).title" class="lazyload" loading="lazy" />
+      </NuxtLink>
+    </object>
 
-  <div class="image-wrap" :class="imageClass" v-else>
-    <div class="image-item" v-for="item in imageItems" :key="(item as string)">
-      <img src="~/assets/icons/color-placeholder.svg" :data-src="imageQuality(item as string)" :alt="alt" class="lazyload"
-        loading="lazy" />
+    <div class="image-wrap" :class="imageClass" v-else>
+      <div class="image-item" v-for="item in imageItems" :key="(item as string)">
+        <img src="~/assets/icons/color-placeholder.svg" :data-src="imageQuality(item as string)" :alt="alt"
+          class="lazyload" loading="lazy" />
+      </div>
     </div>
   </div>
 </template>

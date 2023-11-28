@@ -2,13 +2,11 @@
 import TagItem from "~/components/tag-item/tag-item.vue";
 import { FetchTagList } from "~/api/tag";
 
-const TagsData = ref([]);
-const res = await FetchTagList();
-TagsData.value = res.data;
+const TagsData = (await FetchTagList()).data;
 </script>
 
 <template>
-  <div class="tags-wrap">
+  <div class="tags-wrap" v-if="TagsData.length">
     <TagItem v-for="tag in TagsData" :key="tag.id" :data="tag"></TagItem>
   </div>
 </template>
