@@ -24,7 +24,7 @@ useHead({
         <RichText :richText="PostDetail!.content"></RichText>
       </div>
     </div>
-    <div class="comment-wrap">
+    <div class="comment-wrap" v-if="PostDetail?.commentEnabled">
       <Comment></Comment>
     </div>
   </div>
