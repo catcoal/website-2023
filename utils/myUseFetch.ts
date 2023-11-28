@@ -49,10 +49,13 @@ class HttpRequest {
       if (response.status.value === "success") {
         return response.data.value as IResultData<T>;
       } else {
+        let message = process.dev
+          ? response.error.value?.data.message
+          : response.error.value?.data.uuid;
         throw createError({
           statusCode: 404,
           statusMessage: "页面丢失",
-          message: response.error.value?.data.message,
+          message,
         });
         // throw response.error.value?.data.message;
       }

@@ -13,8 +13,8 @@ const backHome = () => {
 <template>
     <div class="error-container">
         <h1>{{ statusCode }}</h1>
-        <p>{{ props.error?.message }}</p>
-        <span>{{ props.error?.message.stack }}</span>
+        <p>{{ props.error?.statusMessage }}</p>
+        <div v-html="props.error?.message" class="content"></div>
         <button class="Stereobox" @click="backHome">返回</button>
     </div>
 </template>
@@ -27,10 +27,25 @@ const backHome = () => {
     flex-direction: column;
     gap: 10px;
     min-height: 100vh;
+    padding: 100px 0;
 }
 
 p {
     opacity: 0.8;
+}
+
+.content {
+    word-wrap: break-word;
+    white-space: break-spaces;
+    background-color: #000;
+    color: #FFF;
+    font-size: 14px;
+    padding: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-sizing: border-box;
+    max-height: 50vh;
+    overflow: scroll;
 }
 
 span {
