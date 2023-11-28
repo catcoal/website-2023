@@ -1,13 +1,16 @@
 <template>
   <div class="header-nav">
-    <div @click="SwitchMenuShow" class="menu-button filter-bg">
+    <!-- <div @click="SwitchMenuShow" class="menu-button filter-bg">
       <MenuButton></MenuButton>
-    </div>
-    <div class="header-nav-inner filter-bg">
-      <div v-if="routePath !== '/'" key="0" @click="HandleBack" class="back-wrap">
+    </div> -->
+
+    <div v-if="routePath !== '/'" class="back-button filter-bg">
+      <div key="0" @click="HandleBack" class="back-wrap">
         <FontAwesomeIcon icon="fa-solid fa-chevron-left" size="lg" />
       </div>
+    </div>
 
+    <div class="header-nav-inner filter-bg">
       <div class="page-title" key="1">
         {{ pageNameEnum[routeName] }}
       </div>
@@ -69,7 +72,7 @@ const SwitchMenuShow = () => {
   margin-bottom: var(--gap);
 }
 
-.menu-button {
+.back-button {
   cursor: pointer;
   width: 47px;
   min-width: 47px;
@@ -77,7 +80,7 @@ const SwitchMenuShow = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius);
+  border-radius: var(--radius-1);
   overflow: hidden;
 }
 
@@ -86,7 +89,7 @@ const SwitchMenuShow = () => {
   height: 100%;
   width: 100%;
   align-items: center;
-  border-radius: var(--radius);
+  border-radius: var(--radius-1);
   overflow: hidden;
 }
 
@@ -104,8 +107,8 @@ const SwitchMenuShow = () => {
   right: 0;
   bottom: 0;
   background-color: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(25px) saturate(20);
-  -webkit-backdrop-filter: blur(25px) saturate(20);
+  backdrop-filter: blur(25px) saturate(5);
+  -webkit-backdrop-filter: blur(25px) saturate(5);
 }
 
 .back-wrap {
@@ -115,13 +118,12 @@ const SwitchMenuShow = () => {
   align-items: center;
   justify-content: center;
   padding: 10px;
-  border-radius: calc(var(--radius) - 4px);
+  border-radius: var(--radius-r);
   cursor: pointer;
   transition: 0.3s ease;
   transition-property: background-color, color, box-shadow, transform;
   overflow: hidden;
   width: 40px;
-  margin-left: 5px;
   height: 80%;
 }
 

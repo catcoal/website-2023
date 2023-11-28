@@ -1,8 +1,8 @@
 <template>
   <div class="default-layout">
-    <aside class="AppSide left" :class="[{ show: isMenuShow }]">
+    <!-- <aside class="AppSide left" :class="[{ show: isMenuShow }]">
       <SidebarNav></SidebarNav>
-    </aside>
+    </aside> -->
     <main class="AppMain">
       <HeaderNav></HeaderNav>
       <slot></slot>
@@ -22,9 +22,9 @@ import NoticeCom from "~/components/notice-com/notice-com.vue";
 import TagsCom from "~/components/tags-com/tags-com.vue";
 import FooterCom from "./components/footer.vue";
 import HeaderNav from "./components/headerNav.vue";
-import SidebarNav from "./components/sidebarNav.vue";
-const AppStore = useAppStore();
-const isMenuShow = computed(() => AppStore.isMenuShow.value);
+// import SidebarNav from "./components/sidebarNav.vue";
+// const AppStore = useAppStore();
+// const isMenuShow = computed(() => AppStore.isMenuShow.value);
 </script>
 
 <style scoped>
@@ -32,7 +32,7 @@ const isMenuShow = computed(() => AppStore.isMenuShow.value);
   position: relative;
   display: flex;
   justify-content: space-between;
-  max-width: var(--app-max-width);
+  max-width: var(--app-max-width-m);
   margin: 0 auto;
   padding: var(--gap);
   gap: var(--gap);
@@ -58,8 +58,8 @@ const isMenuShow = computed(() => AppStore.isMenuShow.value);
 
 .AppSide.right {
   width: 100%;
-  min-width: 300px;
-  max-width: 300px;
+  min-width: 260px;
+  max-width: 260px;
 }
 
 .AppMain {
