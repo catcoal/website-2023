@@ -26,6 +26,7 @@
 :root {
   --theme-color: #00ba7c;
   --theme-color-1: rgba(84, 183, 129, 0.1);
+  --error-color: tomato;
   --app-max-width: 1200px;
   --app-max-width-m: 768px;
   --gap: 20px;

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import LemTooltip from "~/components/lem-tooltip/lem-tooltip.vue";
 import Gravatar from "~/components/Gravatar/Gravatar.vue";
 import { SendComment, IComment, Comment } from "~/api/comment";
 import { PostDetailKey } from "~/api/post";
@@ -17,6 +18,7 @@ const props = defineProps<{
 const PostDetail = inject(PostDetailKey);
 const MaxTextNumber = 190;
 const isMaxText = computed(() => CommentForm.content.length >= MaxTextNumber);
+const hasUserInfos = computed(() => CommentForm.author && CommentForm.authorUrl && CommentForm.email);
 const currentFocusName = ref<string>();
 const CommentForm = reactive<IComment>({
     author: '',
@@ -78,11 +80,12 @@ const reply = async () => {
         <div class="reply-info" v-if="replyComment">
             <div class="reply-nickname">@ {{ replyComment?.author.author }}</div>
         </div>
-        <div class="header">
-            <div v-show="CommentForm.email" class="avatar-wrap Stereobox">
-                <Gravatar :email="CommentForm.email"></Gravatar>
-            </div>
-            <div class="input-warp" :class="{ 'active': currentFocusName === 'author' || CommentForm?.author }">
+        <div class="avatar-wrap Stereobox" v-show="CommentForm.email">
+            <Gravatar :email="CommentForm.email"></Gravatar>
+        </div>
+        <div class="header" :class="{ 'hide': hasUserInfos && !currentFocusName }">
+            <div class="input-warp"
+                :class="[{ 'active': currentFocusName === 'author' || CommentForm?.author }, { 'focus': currentFocusName === 'author' }]">
                 <div class="input-label">
                     <p>昵称</p>
                     <FontAwesomeIcon icon="fa-cat" size="lg" />
@@ -91,7 +94,8 @@ const reply = async () => {
                     @blur="currentFocusName = ''">
             </div>
 
-            <div class="input-warp" :class="{ 'active': currentFocusName === 'email' || CommentForm?.email }">
+            <div class="input-warp"
+                :class="[{ 'active': currentFocusName === 'email' || CommentForm?.email }, { 'focus': currentFocusName === 'email' }]">
                 <div class="input-label">
                     <p>邮箱</p>
                     <FontAwesomeIcon icon="fa-envelope" size="lg" />
@@ -100,7 +104,8 @@ const reply = async () => {
                     @blur="currentFocusName = ''">
             </div>
 
-            <div class="input-warp" :class="{ 'active': currentFocusName === 'authorUrl' || CommentForm?.authorUrl }">
+            <div class="input-warp"
+                :class="[{ 'active': currentFocusName === 'authorUrl' || CommentForm?.authorUrl }, { 'focus': currentFocusName === 'authorUrl' }]">
                 <div class="input-label">
                     <p>网址</p>
                     <FontAwesomeIcon icon="fa-link" size="lg" />
@@ -159,7 +164,7 @@ const reply = async () => {
     border-radius: var(--radius);
     background-color: var(--theme-color);
     font-size: 12px;
-    left: calc(var(--gap) + 6px);
+    left: calc(var(--gap) + 35px);
     top: -10px;
     user-select: none;
 }
@@ -171,15 +176,28 @@ const reply = async () => {
     gap: 5px;
 }
 
+/* .header.hide {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+}
+
+.header.hide .input-warp::after {
+    opacity: 0;
+} */
+
 .avatar-wrap {
     position: absolute;
     z-index: 2;
     top: -16px;
-    left: -10px;
     width: 30px;
     height: 30px;
     border-radius: 50%;
     overflow: hidden;
+    background-color: var(--primary-bg);
 }
 
 .avatar-wrap>img {
@@ -188,12 +206,21 @@ const reply = async () => {
 }
 
 .input-warp {
+    width: 33%;
+    min-width: 50px;
     position: relative;
     display: flex;
     gap: 0;
     border-bottom: 1px dashed #253445;
     padding: 4px 0;
     font-size: 14px;
+    transition: .3s ease;
+    transition-property: width;
+    will-change: width;
+}
+
+.input-warp.focus {
+    width: 100%;
 }
 
 .input-warp::after {
@@ -226,7 +253,9 @@ const reply = async () => {
 }
 
 .input-label {
-    position: relative;
+    pointer-events: none;
+    position: absolute;
+    bottom: 2px;
     white-space: nowrap;
 }
 
@@ -249,8 +278,10 @@ const reply = async () => {
 
 .input-warp>input {
     width: 100%;
-    padding: 0 5px 0 3px;
+    padding: 0 5px 0 30px;
     background-color: transparent;
+    /* color: var(--theme-color); */
+    /* text-indent: 30px; */
 }
 
 textarea {
@@ -285,7 +316,7 @@ textarea::placeholder {
 }
 
 .max-text.max {
-    color: tomato;
+    color: var(--error-color);
     animation: shake .3s cubic-bezier(1, 1.41, 1, 1.51) forwards;
 }
 
@@ -310,7 +341,7 @@ textarea::placeholder {
 .tip-wrap {
     font-size: 12px;
     font-weight: bold;
-    background-color: tomato;
+    background-color: var(--error-color);
     color: #FFF;
     padding: 1px 5px;
     border-radius: 5px;

@@ -17,6 +17,7 @@ const reply = () => {
 }
 
 const replySuccess = (comment: Comment) => {
+    showReply.value = false;
     if (props.rootComment) {
         props.rootComment?.childComments.unshift(comment);
     } else {
@@ -109,10 +110,10 @@ const replySuccess = (comment: Comment) => {
 
 .status {
     position: absolute;
-    right: 10px;
-    top: 10px;
+    right: var(--gap);
+    top: var(--gap);
     color: #FFF;
-    background-color: tomato;
+    background-color: var(--error-color);
     padding: 1px 8px;
     border-radius: 20px;
     font-size: 12px;
@@ -125,7 +126,7 @@ const replySuccess = (comment: Comment) => {
     height: 35px;
     border-radius: 50%;
     overflow: hidden;
-    background-color: #FFF;
+    background-color: var(--primary-bg);
     padding: 2px;
 }
 
@@ -146,7 +147,7 @@ const replySuccess = (comment: Comment) => {
 
 .parent-comment {
     font-size: 12px;
-    background-color: #eee;
+    background-color: var(--theme-color-1);
     padding: 1px 7px;
     border-radius: var(--radius);
     text-overflow: ellipsis;
@@ -154,7 +155,7 @@ const replySuccess = (comment: Comment) => {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
-    opacity: 0.5;
+    opacity: 0.6;
 }
 
 .comment-body-header {
@@ -183,6 +184,8 @@ const replySuccess = (comment: Comment) => {
 }
 
 .comment-body p {
+    white-space: pre-wrap;
+    word-break: break-word;
     font-size: 14px;
 }
 
