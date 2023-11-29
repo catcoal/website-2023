@@ -3,30 +3,46 @@ import Gravatar from "~/components/Gravatar/Gravatar.vue";
 import { SendComment, IComment, Comment } from "~/api/comment";
 import { PostDetailKey } from "~/api/post";
 
+const authStore = useAuthStore();
+const userInfos = computed(() => authStore.userInfos.value);
 const emit = defineEmits({
     success: (comment: Comment) => {
         return comment
     }
 });
+const props = defineProps<{
+    replyComment?: Comment
+}>();
+
 const PostDetail = inject(PostDetailKey);
+const MaxTextNumber = 190;
+const isMaxText = computed(() => CommentForm.content.length >= MaxTextNumber);
 const currentFocusName = ref<string>();
 const CommentForm = reactive<IComment>({
     author: '',
     email: '',
     authorUrl: '',
     postId: PostDetail?.value?.id!,
-    parentId: undefined,
+    parentId: props.replyComment?.id,
     content: ''
 });
 const replying = ref(false);
 const replyTip = ref('');
 
+onNuxtReady(() => {
+    CommentForm.author = userInfos.value?.author || '';
+    CommentForm.email = userInfos.value?.email || '';
+    CommentForm.authorUrl = userInfos.value?.authorUrl || '';
+})
+
+// 自适应高度
 const autoResizeTextarea = (event: Event): void => {
     let target = event.target as HTMLElement;
     target.style.height = 'auto';
     target.style.height = target.scrollHeight + 'px';
 }
 
+// 回复
 const reply = async () => {
     if (replying.value) return;
     let { author, authorUrl, email, content } = CommentForm;
@@ -43,6 +59,11 @@ const reply = async () => {
     try {
         let comment = (await SendComment(CommentForm))?.data;
         CommentForm.content = '';
+        authStore.setUserInfos({
+            author: CommentForm.author,
+            email: CommentForm.email,
+            authorUrl: CommentForm.authorUrl
+        });
         emit('success', comment!);
     } catch (err: any) {
         replyTip.value = err;
@@ -54,6 +75,9 @@ const reply = async () => {
 
 <template>
     <div class="comment-reply-wrap Stereobox">
+        <div class="reply-info" v-if="replyComment">
+            <div class="reply-nickname">@ {{ replyComment?.author.author }}</div>
+        </div>
         <div class="header">
             <div v-show="CommentForm.email" class="avatar-wrap Stereobox">
                 <Gravatar :email="CommentForm.email"></Gravatar>
@@ -86,15 +110,21 @@ const reply = async () => {
             </div>
         </div>
         <div class="body">
-            <textarea v-model="CommentForm.content" rows="2" placeholder="说点什么吧～"
-                @input="autoResizeTextarea($event)"></textarea>
+            <textarea v-model="CommentForm.content" rows="2" placeholder="说点什么吧～" @input="autoResizeTextarea($event)"
+                :maxlength="MaxTextNumber"></textarea>
         </div>
         <div class="footer">
             <div class="tip-wrap" :class="{ 'show': replyTip }">
                 <p>{{ replyTip }}</p>
             </div>
-            <div @click.stop="reply" class="reply" :class="{ 'replying': replying, 'replyed': !replying }">
-                <FontAwesomeIcon icon="fa-paper-plane" size="lg" />
+            <div class="footer-right">
+                <div class="max-text" :class="{ max: isMaxText }">
+                    <span>{{ CommentForm.content.length }}</span>
+                    <span>/{{ MaxTextNumber }}</span>
+                </div>
+                <div @click.stop="reply" class="reply" :class="{ 'replying': replying, 'replyed': !replying }">
+                    <FontAwesomeIcon icon="fa-paper-plane" size="lg" />
+                </div>
             </div>
         </div>
     </div>
@@ -106,7 +136,6 @@ const reply = async () => {
     background-color: #FFF;
     padding: var(--gap);
     border-radius: var(--radius);
-    /* overflow: hidden; */
 }
 
 .comment-reply-wrap::after {
@@ -117,9 +146,22 @@ const reply = async () => {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: linear-gradient(125deg, var(--theme-color) -70%, transparent 30%);
+    background-image: linear-gradient(125deg, var(--theme-color) -130%, transparent 30%);
     opacity: 0.6;
     border-radius: inherit;
+}
+
+.reply-info {
+    position: absolute;
+    z-index: 2;
+    color: #FFF;
+    padding: 1px 5px;
+    border-radius: var(--radius);
+    background-color: var(--theme-color);
+    font-size: 12px;
+    left: calc(var(--gap) + 6px);
+    top: -10px;
+    user-select: none;
 }
 
 .header {
@@ -132,7 +174,7 @@ const reply = async () => {
 .avatar-wrap {
     position: absolute;
     z-index: 2;
-    top: -10px;
+    top: -16px;
     left: -10px;
     width: 30px;
     height: 30px;
@@ -216,12 +258,53 @@ textarea {
     width: 100%;
     padding: 10px 0;
     background-color: transparent;
+    line-height: 20px;
+}
+
+textarea::placeholder {
+    opacity: 0.5;
 }
 
 .footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
+}
+
+.footer-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.max-text {
+    white-space: nowrap;
+    font-size: 12px;
+    font-weight: 300;
+}
+
+.max-text.max {
+    color: tomato;
+    animation: shake .3s cubic-bezier(1, 1.41, 1, 1.51) forwards;
+}
+
+@keyframes shake {
+    0% {
+        transform: scale(1);
+    }
+
+    33% {
+        transform: scale(1.1);
+    }
+
+    66% {
+        transform: scale(0.95);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 .tip-wrap {
@@ -235,6 +318,8 @@ textarea {
     transform: translateX(-5px);
     transition: .3s ease;
     transition-property: opacity, transform;
+    max-height: 95px;
+    overflow: auto;
 }
 
 .tip-wrap.show {
@@ -248,6 +333,7 @@ textarea {
     background-color: var(--theme-color);
     color: #FFF;
     width: 30px;
+    min-width: 30px;
     height: 30px;
     display: flex;
     align-items: center;
@@ -256,6 +342,10 @@ textarea {
     font-size: 12px;
     transition: .3s ease;
     transition-property: transform, opacity;
+}
+
+.reply:hover {
+    opacity: 0.7;
 }
 
 .reply:active {
@@ -279,12 +369,12 @@ textarea {
         transform: translate(0px, 0px);
     }
 
-    10% {
+    20% {
         opacity: 0;
         transform: translate(20px, -20px);
     }
 
-    20% {
+    40% {
         opacity: 0;
         transform: translate(-20px, 20px);
     }
@@ -293,24 +383,6 @@ textarea {
 .reply.replying>svg {
     animation: fly 3s linear infinite;
 }
-
-/* .reply::after {
-    content: '';
-    position: absolute;
-    z-index: 0;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 0.5;
-    background-image: linear-gradient(red, green);
-    transition: .3s ease;
-    transition-property: background-position;
-} */
-
-/* .reply:hover::after {
-    background-position: 200px;
-} */
 
 .reply>svg {
     position: relative;

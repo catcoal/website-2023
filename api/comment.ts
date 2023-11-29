@@ -26,6 +26,13 @@ export interface Comment {
   authorId: number;
   author: Author;
   childComments: Comment[];
+  parent?: {
+    id: number;
+    content: string;
+    author: {
+      author: string;
+    };
+  };
 }
 
 export const SendComment = (data: IComment): Promise<IResultData<Comment>> => {
