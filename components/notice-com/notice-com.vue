@@ -10,9 +10,11 @@ notice.value = res.data.value;
 <template>
   <div class="notice-wrap" v-if="notice">
     <div class="header-wrap">
-      <div class="tag-wrap">
-        <FontAwesomeIcon icon="fa-fish"></FontAwesomeIcon>
-        <span>消息</span>
+      <div class="label-wrap">
+        <i>
+          <FontAwesomeIcon icon="fa-fish"></FontAwesomeIcon>
+        </i>
+        <p>消息</p>
       </div>
     </div>
     <div class="body-wrap">
@@ -36,7 +38,7 @@ notice.value = res.data.value;
   display: block;
 }
 
-.tag-wrap {
+.label-wrap {
   display: flex;
   align-items: center;
   gap: 5px;
