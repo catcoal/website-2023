@@ -4,14 +4,14 @@ import { GetNotice } from "~/api/common";
 const notice = ref("");
 
 let res = await GetNotice('notice');
-notice.value = res.data;
+notice.value = res.data.value;
 </script>
 
 <template>
   <div class="notice-wrap" v-if="notice">
     <div class="header-wrap">
       <div class="tag-wrap">
-        <!-- <IconLord :icon="'msetysan'" :trigger="'loop'"></IconLord> -->
+        <FontAwesomeIcon icon="fa-fish"></FontAwesomeIcon>
         <span>消息</span>
       </div>
     </div>

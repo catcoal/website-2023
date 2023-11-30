@@ -7,6 +7,7 @@ import {
   faLink,
   faEnvelope,
   faPaperPlane,
+  faFish,
 } from "@fortawesome/free-solid-svg-icons";
 import { faMessage } from "@fortawesome/free-regular-svg-icons";
 // 因为默认添加了 nuxt会造成一些错误，所以不自动添加样式
@@ -20,6 +21,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   library.add(faEnvelope);
   library.add(faPaperPlane);
   library.add(faMessage);
+  library.add(faFish);
   // 全局注册 font-awesome-icon 组件
   nuxtApp.vueApp.component("FontAwesomeIcon", FontAwesomeIcon);
 });
