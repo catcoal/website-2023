@@ -1,4 +1,4 @@
-import Request, { IResultData, PageOptions } from "~/utils/myUseFetch";
+import Request, { IResultData, FilterOptions } from "~/utils/myUseFetch";
 import { Author } from "./post";
 
 type CommentStatus = "Unreviewed" | "Show" | "Hide" | "Rubbish";
@@ -40,7 +40,7 @@ export const SendComment = (data: IComment): Promise<IResultData<Comment>> => {
 };
 
 export const FetchComments = (
-  query: CommentQuery & PageOptions
+  query: CommentQuery & FilterOptions
 ): Promise<IResultData<Comment[]>> => {
   return Request.get("/comments", query);
 };

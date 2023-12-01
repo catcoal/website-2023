@@ -1,4 +1,4 @@
-import Request, { IResultData, PageOptions } from "~/utils/myUseFetch";
+import Request, { IResultData, FilterOptions } from "~/utils/myUseFetch";
 
 type TagType = "Category" | "ArticleTag";
 
@@ -17,7 +17,7 @@ export interface TagQuery {
 
 // 获取Tag列表
 export function FetchTagList(
-  data: TagQuery & PageOptions
+  data: TagQuery & FilterOptions
 ): Promise<IResultData<ResTag[]>> {
   return Request.get("/tags", data);
 }

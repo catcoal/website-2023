@@ -12,7 +12,7 @@ export interface IResultData<T> {
   meta?: any;
 }
 
-export interface PageOptions {
+export interface FilterOptions {
   page?: number;
   pageSize?: number;
 }

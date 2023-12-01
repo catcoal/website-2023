@@ -1,4 +1,4 @@
-import Request, { IResultData, PageOptions } from "~/utils/myUseFetch";
+import Request, { IResultData, FilterOptions } from "~/utils/myUseFetch";
 import { ResTag } from "./tag";
 import { InjectionKey } from "nuxt/dist/app/compat/capi";
 
@@ -46,7 +46,7 @@ interface PostListQuery {
 
 // 获取文章列表
 export function FetchPostList(
-  params?: PostListQuery & PageOptions
+  params?: PostListQuery & FilterOptions
 ): Promise<IResultData<PostDetail[]>> {
   return Request.get("/posts", params);
 }
