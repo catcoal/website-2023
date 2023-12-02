@@ -1,9 +1,5 @@
 <template>
   <div class="header-nav">
-    <!-- <div @click="SwitchMenuShow" class="menu-button filter-bg">
-      <MenuButton></MenuButton>
-    </div> -->
-
     <div v-if="routePath !== '/'" class="back-button filter-bg">
       <div key="0" @click="HandleBack" class="back-wrap">
         <FontAwesomeIcon icon="fa-solid fa-chevron-left" size="lg" />
@@ -22,7 +18,6 @@
 
 <script setup>
 import TagItem from "~/components/tag-item/tag-item.vue";
-import MenuButton from "~/components/menu-button/menu-button.vue";
 
 const AppStore = useAppStore();
 const isMenuShow = computed(() => AppStore.isMenuShow.value);
